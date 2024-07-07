@@ -1,0 +1,4 @@
+LoadLibrary
+GetProcAddress
+VirtualProtect
+

